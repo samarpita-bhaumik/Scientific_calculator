@@ -5,6 +5,10 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class Scientific_Calculator {
+    public double squareRoot(int x)
+    {
+        return Math.sqrt(x);
+    }
     public double factorial(int x)
     {
         double fact=1;
@@ -36,7 +40,7 @@ public class Scientific_Calculator {
                 case 1:
                     System.out.println("Enter a number:");
                     x=sc.nextInt();
-                    result=Math.sqrt(x);
+                    result=sci.squareRoot(x);
                     System.out.println("Square root function of x is :" + result);
                     break;
                 case 2:
@@ -66,4 +70,6 @@ public class Scientific_Calculator {
         }
 
     }
+
+
 }
