@@ -52,7 +52,7 @@ pipeline {
                     steps {
                         script {
                             ansiblePlaybook(
-                                playbook: 'scientificCalculatorDeploy.yml',
+                                playbook: 'scienticCalculatorDeploy.yml',
                                 inventory: 'inventory'
                              )
                         }
