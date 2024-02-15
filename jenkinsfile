@@ -45,7 +45,7 @@ pipeline {
                 script{
                     docker.withRegistry('', 'DockerHubCred') {
                     sh 'docker tag scientific_calculator samarpita1/scientific_calc12:latest'
-                    sh 'docker push 'samarpita1/scientific_calc12
+                    sh 'docker push samarpita1/scientific_calc12'
                     }
                  }
             }
