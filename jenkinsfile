@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_IMAGE_NAME = 'scientific_calc12'
+        GITHUB_REPO_URL = 'https://github.com/samarpita-bhaumik/Scientific_calculator.git'
+        DOCKERHUB_USERNAME = 'samarpita1'
+        DOCKERHUB_PASSWORD = 'Sunnidhya1@'
+        LANG = 'en_US.UTF-8'
+        LC_ALL = 'en_US.UTF-8'
+    }
+
+    stages {
+        stage('Checkout from Github') {
+            steps {
+                script {
+                    git branch: 'main', url: "${GITHUB_REPO_URL}"
+                }
+            }
+        }
+
+        stage('Maven Build') {
+                    steps {
+                        sh 'mvn clean install'
+                    }
+                }
+
+        stage('Building the Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE_NAME}", '.')
+                }
+            }
+        }
+
+        stage('Login to Dockerhub') {
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: 'DockerHubCred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                            sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
+                        }
+                    }
+                }
+
+        stage('Pushing the Docker Image') {
+            steps {
+                script{
+                    docker.withRegistry('', 'DockerHubCred') {
+                    sh 'docker tag sci-calculator roysun96/scientific_calculator_spe:latest'
+                    sh 'docker push roysun96/scientific_calculator_spe'
+                    }
+                 }
+            }
+        }
+
+
+    }
+}
