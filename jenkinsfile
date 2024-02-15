@@ -34,7 +34,7 @@ pipeline {
 
         stage('Login to Dockerhub') {
                     steps {
-                        withCredentials([usernamePassword(credentialsId: 'Samarpita1', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        withCredentials([usernamePassword(credentialsId: '2ce1ffa9-b0ea-480b-b92f-5452dbfd581b', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                             sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
                         }
                     }
@@ -43,7 +43,7 @@ pipeline {
         stage('Pushing the Docker Image') {
             steps {
                 script{
-                    docker.withRegistry('', 'DockerHubCred') {
+                    docker.withRegistry('', '2ce1ffa9-b0ea-480b-b92f-5452dbfd581b') {
                     sh 'docker tag scientific_calculator samarpita1/scientific_calc12:latest'
                     sh 'docker push samarpita1/scientific_calc12'
                     }
