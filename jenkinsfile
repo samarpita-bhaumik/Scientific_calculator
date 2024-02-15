@@ -5,8 +5,6 @@ pipeline {
         GITHUB_REPO_URL = 'https://github.com/samarpita-bhaumik/Scientific_calculator.git'
         DOCKERHUB_USERNAME = 'samarpita1'
         DOCKERHUB_PASSWORD = 'Sunnidhya1@'
-        LANG = 'en_US.UTF-8'
-        LC_ALL = 'en_US.UTF-8'
     }
 
     stages {
@@ -50,7 +48,16 @@ pipeline {
                  }
             }
         }
-
+        stage('Run Ansible Playbook') {
+                    steps {
+                        script {
+                            ansiblePlaybook(
+                                playbook: 'scientificCalculatorDeploy.yml',
+                                inventory: 'inventory'
+                             )
+                        }
+                    }
+                }
 
     }
 }
