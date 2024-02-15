@@ -48,16 +48,16 @@ pipeline {
                  }
             }
         }
-        stage('Run Ansible Playbook') {
-                    steps {
-                        script {
-                            ansiblePlaybook(
-                                playbook: 'scienticCalculatorDeploy.yml',
-                                inventory: 'inventory'
-                             )
-                        }
-                    }
-                }
+//         stage('Run Ansible Playbook') {
+//                     steps {
+//                         script {
+//                             ansiblePlaybook(
+//                                 playbook: 'scienticCalculatorDeploy.yml',
+//                                 inventory: 'inventory'
+//                              )
+//                         }
+//                     }
+//                 }
 
     }
 }
