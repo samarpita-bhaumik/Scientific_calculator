@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = 'scientific_calc12'
+        DOCKER_IMAGE_NAME = 'scientific_calculator'
         GITHUB_REPO_URL = 'https://github.com/samarpita-bhaumik/Scientific_calculator.git'
         DOCKERHUB_USERNAME = 'samarpita1'
         DOCKERHUB_PASSWORD = 'Sunnidhya1@'
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script{
                     docker.withRegistry('', '2ce1ffa9-b0ea-480b-b92f-5452dbfd581b') {
-                    sh 'docker tag scientific_calculator12 samarpita1/scientific_calc12:latest'
+                    sh 'docker tag scientific_calculator samarpita1/scientific_calc12:latest'
                     sh 'docker push samarpita1/scientific_calc12'
                     }
                  }
