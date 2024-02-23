@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout from Github Repo') {
+        stage('Checkout from Github Repository') {
             steps {
                 script {
                     git branch: 'main', url: "${GITHUB_REPO_URL}"
