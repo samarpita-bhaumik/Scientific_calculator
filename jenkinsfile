@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout from Github Repos') {
+        stage('Checking out from the Github Repository') {
             steps {
                 script {
                     git branch: 'main', url: "${GITHUB_REPO_URL}"
@@ -16,13 +16,13 @@ pipeline {
             }
         }
 
-        stage('Maven Build') {
+        stage('Using the Maven Build Tool') {
                     steps {
                         sh 'mvn clean install'
                     }
                 }
 
-        stage('Building Docker') {
+        stage('Creating the Docker Image') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE_NAME}", '.')
@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('Login to the Dockerhub') {
+        stage('Login in the Dockerhub') {
                     steps {
                         withCredentials([usernamePassword(credentialsId: '2ce1ffa9-b0ea-480b-b92f-5452dbfd581b', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                             sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
@@ -48,7 +48,7 @@ pipeline {
                  }
             }
         }
-        stage('Run Ansible Playbook') {
+        stage('Deploy') {
                     steps {
                         script {
                             ansiblePlaybook(
@@ -62,7 +62,7 @@ pipeline {
     }
    post{
         always{
-            mail bcc: '', body: 'Build Status Changed', cc: '', from: '', replyTo: '', subject: 'Build Jenkins Calculator', to: 'samarpitabhaumik2017@gmail.com'
+            mail bcc: '', body: 'Build Status Updated', cc: '', from: '', replyTo: '', subject: 'Build Jenkins Calculator', to: 'samarpitabhaumik2017@gmail.com'
 }
 }
 }
