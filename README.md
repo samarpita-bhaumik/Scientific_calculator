@@ -1,2 +1,2 @@
 # Scientific_calculator
-SPE
+SPE Project
